@@ -12,11 +12,14 @@ sns.set(style='whitegrid')
 # --- LOAD DATA ---
 @st.cache_data
 def load_data():
-    # Mengambil data yang sudah dibersihkan
-    df = pd.read_csv("main_data.csv")
+    # Menggunakan path relatif agar Streamlit bisa menemukan file di dalam folder yang sama
+    import os
+    base_path = os.path.dirname(__file__)
+    file_path = os.path.join(base_path, "main_data.csv")
+    
+    df = pd.read_csv(file_path)
     df["dteday"] = pd.to_datetime(df["dteday"])
     return df
-
 main_df = load_data()
 
 # --- SIDEBAR ---
